@@ -6,6 +6,7 @@ from django.views.generic import (
     ListView,
     CreateView,
     UpdateView,
+    DeleteView,
 )
 from django.shortcuts import get_object_or_404, redirect
 from .models import Card
@@ -22,6 +23,18 @@ class CardCreateView(CreateView):
 
 class CardUpdateView(CardCreateView, UpdateView):
     success_url = reverse_lazy("card-list")
+
+#add a view for deleting a card by card.id
+class CardDeleteView(CardUpdateView, DeleteView):
+    def get(self, request, *args, **kwargs):
+        card = Card.objects.filter(pk=self.kwargs["pk"]).first()
+        if card is not None:
+            card.delete()
+
+        if 'edit/' in request.META.get('HTTP_REFERER', ''):
+            return redirect(reverse_lazy('card-list'))
+        else:
+            return redirect(request.META.get("HTTP_REFERER", reverse_lazy('card-list'))) 
 
 #create a view for a single deck
 class DeckView(CardListView):

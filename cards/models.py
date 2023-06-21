@@ -1,3 +1,4 @@
+from typing import Any, Dict, Tuple
 from django.db import models
 
 # Create your models here.
@@ -29,3 +30,7 @@ class Card(models.Model):
             self.save()
         
         return self
+    
+    # add .delete() method to Card model to delete one card from the DB
+    def delete(self, *args, **kwargs):
+        super(Card, self).delete(*args, **kwargs)

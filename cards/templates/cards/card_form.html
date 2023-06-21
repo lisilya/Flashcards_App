@@ -14,4 +14,12 @@
     <a href="{% url 'card-list' %}">
         Cancel
     </a>
+    
+    <!-- delete the card and return to the card-list after card deletion-->
+    {% if card %}
+        <span style="color: var(--accent);"> | </span>
+        <a href="{% url 'card-delete' card.id %}">
+            Delete
+        </a>
+    {% endif %}
 {% endblock %}

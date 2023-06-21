@@ -24,4 +24,10 @@ urlpatterns = [
         views.DeckView.as_view(),
         name="deck"
         ),
+    #adding a path for deleting a card
+    path(
+        "delete/<int:pk>",
+        views.CardDeleteView.as_view(),
+        name="card-delete"
+        ),
 ]
