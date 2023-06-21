@@ -1,0 +1,11 @@
+{% extends "cards/base.html" %}
+
+{% block content %}
+    {% for category, cards in categories.items %}
+        <h1>{{ category }}</h1>
+        {% for card in cards %}
+            {# Include the template for displaying individual cards #}
+            {% include "cards/card.html" %}
+        {% endfor %}
+    {% endfor %}
+{% endblock content %}

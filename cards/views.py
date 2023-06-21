@@ -1,5 +1,6 @@
-# Removed from django.shortcuts import render
+from django.shortcuts import render
 import random
+from collections import defaultdict
 from typing import Any, Dict
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -7,6 +8,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView,
+    View,
 )
 from django.shortcuts import get_object_or_404, redirect
 from .models import Card
@@ -15,6 +17,14 @@ from .forms import CardCheckForm
 class CardListView(ListView):
     model = Card
     queryset = Card.objects.all().order_by("deck", "-date_created")
+
+class CategoryListView(View):
+    def get(self, request):
+        cards = Card.objects.all()
+        categories = defaultdict(list)
+        for card in cards:
+            categories[card.category].append(card)
+        return render(request, 'cards/category_list.html', {'categories': dict(categories)})
 
 class CardCreateView(CreateView):
     model = Card

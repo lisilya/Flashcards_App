@@ -6,6 +6,16 @@ from django.db import models
 NUM_DECKS = 5
 DECKS = range(1, NUM_DECKS + 1)
 
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def get_cards(self):
+        return Card.objects.filter(category=self.title)
+
 class Card(models.Model):
     question = models.CharField(max_length=100)
     answer = models.CharField(max_length=100)
@@ -17,7 +27,6 @@ class Card(models.Model):
     category = models.CharField(max_length=100, default="")
     knownAnswerCount = models.IntegerField(default=0)
     unknownAnswerCount = models.IntegerField(default=0)
-
 
     def __str__(self):
         return f"{self.question}"

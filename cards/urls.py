@@ -30,4 +30,10 @@ urlpatterns = [
         views.CardDeleteView.as_view(),
         name="card-delete"
         ),
+    #adding a path for category list
+    path(
+        "category-list/",
+        views.CategoryListView.as_view(),
+        name="category-list"
+        ),
 ]
