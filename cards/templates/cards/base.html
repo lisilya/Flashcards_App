@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Powered Flashcards</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+        /* Custom CSS */
+    
+        :root {
+            --accent: #6e48ad;
+            --accent-bg: #6e48ad;
+            --bg: #1e1e1e;
+            --text: #f5f5f5;
+            --text-light: #b1b1b1;
+            --border: #3c3c3c;
+            --code: #d81b60;
+            --preformatted: #dcdcdc;
+        }
+    
+        article {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        summary, details {
+            border: none;
+            background-color: var(--text);
+            color: var(--accent-bg);
+            border-radius: 5px;
+        }
+    
+        h2 {
+            text-align: center;
+            color: var(--text);
+        }
+    
+        h2, h4 {
+            margin-top: 0;
+            color: var(--text);
+        }
+    
+        hr {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+    
+        button,
+        a[role="button"] {
+            background-color: var(--accent-bg);
+            color: var(--text);
+            text-decoration: none;
+            border: 1px solid var(--text-light);
+            border-radius: 5px;
+            padding: 0.5em;
+            /* margin: 0.5em; */
+        }
+    
+        input, select, textarea {
+            background-color: var(--bg);
+            color: var(--text);
+            width: 100%;
+            border: 1px solid var(--border);
+        }
+
+        header>nav a:visited{
+            border: 1px solid var(--text-light);
+            color: var(--accent-bg);
+            }
+
+        header>nav a:hover, header a:hover, header>nav a:active{
+            color: var(--text);
+            background-color: var(--accent-bg);
+            border: 1px solid var(--text-light);
+        }
+        
+        header>nav a, header a, header>nav a{
+            color: var(--accent-bg);
+            background-color: var(--text);
+        }
+
+        button:hover,
+        a[role="button"]:hover {
+            background-color: var(--text);
+            color: var(--accent-bg);
+        }
+
+        mark {
+            background-color: var(--accent-bg);
+            color: var(--text);
+            border: 1px solid var(--text-light);
+            border-radius: 1px;
+            font-weight: bold;
+            padding: 2px 4px;
+        }
+
+        form>input[type="submit"] {
+            color: var(--text);
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI Powered Flashcards App</h1>
+        {% include 'cards/navigation.html' %}
+    </header>
+    <main>
+        {% block content %}
+            <h2>Welcome to Flashcards!</h2>
+        {% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{# link to card-list url with All cards #}
+{% load cards_tags %}
+<nav>
+    <a href="{% url 'card-list' %}?status=all">🗂️ All cards</a>
+    {% deck_as_links %}
+</nav>

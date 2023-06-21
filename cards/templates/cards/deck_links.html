@@ -1,0 +1,8 @@
+<!--create a template with deck links-->
+{% load humanize %}
+
+{% for deck in decks %}
+    <a href="{% url 'deck' deck_num=deck.number %}">
+        🗃 {{ deck.number | ordinal}} Deck <mark>{{ deck.card_count }}</mark>
+    </a>
+{% endfor %}
