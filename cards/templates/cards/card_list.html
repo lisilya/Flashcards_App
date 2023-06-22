@@ -1,5 +1,4 @@
 {% extends "cards/base.html" %}
-{% load humanize %}
 
 {% block content %}
     <h2>
@@ -10,7 +9,7 @@
     </a>
     {% for card in card_list %}
         {% ifchanged  %}
-            <h3>🗃 {{ card.deck | ordinal}} Deck</h3>
+            <h3>🗃 {{ card.deck_name }} Deck</h3>
         {% endifchanged %}
         {% include "cards/card.html" %}
     {% endfor %}

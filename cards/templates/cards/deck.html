@@ -3,7 +3,7 @@
 {% load humanize %}
 
 {% block content %}
-    <h2>🗃 {{ deck_number | ordinal }} Deck</h2>
+    <h2>🗃 {{ deck_name }} Deck</h2>
     <mark>{{ object_list | length }}</mark>
     Card{{ object_list | pluralize }} left in deck.
     <hr>

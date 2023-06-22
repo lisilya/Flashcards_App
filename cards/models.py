@@ -1,9 +1,10 @@
 from typing import Any, Dict, Tuple
 from django.db import models
+from .constants import DECK_NAMES
 
 # Create your models here.
 
-NUM_DECKS = 5
+NUM_DECKS = 3
 DECKS = range(1, NUM_DECKS + 1)
 
 class Category(models.Model):
@@ -27,6 +28,10 @@ class Card(models.Model):
     category = models.CharField(max_length=100, default="")
     knownAnswerCount = models.IntegerField(default=0)
     unknownAnswerCount = models.IntegerField(default=0)
+
+    @property
+    def deck_name(self):
+        return DECK_NAMES.get(self.deck, 'Unknown')
 
     def __str__(self):
         return f"{self.question}"

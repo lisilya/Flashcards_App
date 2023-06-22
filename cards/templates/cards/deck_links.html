@@ -1,8 +1,8 @@
 <!--create a template with deck links-->
-{% load humanize %}
+{% load deck_filters %}
 
 {% for deck in decks %}
     <a href="{% url 'deck' deck_num=deck.number %}">
-        🗃 {{ deck.number | ordinal}} Deck <mark>{{ deck.card_count }}</mark>
+        🗃 {{ deck.number | deck_name }} <mark>{{ deck.card_count }}</mark>
     </a>
 {% endfor %}

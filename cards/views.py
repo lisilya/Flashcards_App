@@ -12,7 +12,8 @@ from django.views.generic import (
 )
 from django.shortcuts import get_object_or_404, redirect
 from .models import Card
-from .forms import CardCheckForm
+from .forms import CardCheckForm, CardForm
+from .constants import DECK_NAMES
 
 class CardListView(ListView):
     model = Card
@@ -28,7 +29,7 @@ class CategoryListView(View):
 
 class CardCreateView(CreateView):
     model = Card
-    fields = ["question", "answer", "deck", "category"]
+    form_class = CardForm
     success_url = reverse_lazy("card-create")
 
 class CardUpdateView(CardCreateView, UpdateView):
@@ -50,17 +51,21 @@ class CardDeleteView(CardUpdateView, DeleteView):
 class DeckView(CardListView):
     template_name = "cards/deck.html"
     form_class = CardCheckForm
-
+    
     def get_queryset(self):
         return Card.objects.filter(deck=self.kwargs["deck_num"])
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["deck_number"] = self.kwargs["deck_num"]
+        context["deck_name"] = self.deck_name(self.kwargs["deck_num"])  # Add deck name to context
         if self.object_list: # type: ignore
             context["check_card"] = random.choice(self.object_list) # type: ignore
         return context
-    
+
+    def deck_name(self, deck_number):
+        return DECK_NAMES.get(deck_number, 'Unknown')   
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST) # type: ignore
         if form.is_valid():
@@ -68,3 +73,6 @@ class DeckView(CardListView):
             card.move(form.cleaned_data["solved"])
 
         return redirect(request.META.get("HTTP_REFERER"))
+
+   
+    
