@@ -41,7 +41,11 @@ class Card(models.Model):
         new_deck = self.deck + 1 if solved else DECKS[0]
         if new_deck in DECKS:
             self.deck = new_deck
-            self.save()
+        if solved:
+            self.knownAnswerCount += 1
+        else:
+            self.unknownAnswerCount += 1
+        self.save()
         
         return self
     

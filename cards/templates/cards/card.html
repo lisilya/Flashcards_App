@@ -2,31 +2,20 @@
     <h4>{{ card.question }}</h4>
     {% if  not check_card %}
         <p>{{ card.answer }}</p>
-        <hr>
-        <a href="{% url 'card-update' card.id%}" role="button">
-            📝 Edit Card
-        </a>
-        <span> </span>
-        <a href="{% url 'card-delete' card.id %}" role="button">
-            🗑️ Delete Card
-        </a>
+    {% include 'cards/card_ctrl.html' %}
     {% else %}
         <details>
             <summary>Show Answer</summary>
-            <p>{{ card.answer }}</p>
+            <div class="notice" style="text-align: center;">
+                <strong style="color: var(--text);">{{ card.answer }}</strong>
+            </div>
             <hr>
             <div>
                 <p>Did you know the answer?</p>
                 {% include "cards/card_check_form.html" with solved=True %}
                 {% include "cards/card_check_form.html" with solved=False %}
             </div>
-            <hr>
-            <a href="{% url 'card-update' card.id %}" role="button">
-                📝 Edit Card
-            </a>
-            <a href="{% url 'card-delete' card.id %}" role="button">
-                🗑️ Delete Card
-            </a>
+            {% include 'cards/card_ctrl.html' %}
         </details>
     {% endif %}
 </article>

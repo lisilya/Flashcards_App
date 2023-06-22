@@ -1,0 +1,22 @@
+<hr>
+<div>
+<a href="{% url 'card-update' card.id%}" role="button">
+    📝 Edit Card
+</a>
+<span> </span>
+<a href="{% url 'card-delete' card.id %}" role="button">
+    🗑️ Delete Card
+</a>
+<aside>
+    {# add one div with small bold text on the center #}
+    <div style="text-align: center;">
+        <small><b>Card Stats</b></small>
+    <br>
+    <div style="display: inline-block; width: 45%; text-align: left;">
+        <small>Victories: {{ card.knownAnswerCount }}</small>
+    </div>
+    <div style="display: inline-block; width: 45%; text-align: right;">
+        <small>Defeats: {{ card.unknownAnswerCount }}</small>
+    </div>
+</aside>
+</div>
